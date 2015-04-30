@@ -1,31 +1,51 @@
-# Minisite Template
+# tco-hackathon
 
-A single page node application that can be cloned to make a new community minisite. You can see a demo of the site at [http://minisite-template.herokuapp.com](http://minisite-template.herokuapp.com). The page displays a list of challenges from the search API plus a leaderboard for the community. Both are configurable. You can also filter challenges to display only those of a particular status.
+A barebones starter application for Auth0 and the topcoder API. Provides login functionality, security and viewing user info.
 
-The original HTML templates are included in case you need to use them.
+## Auth0 Settings
 
-## Setup
+Setup for Auth0 is extremely fast and easy. Just [sign up for a free account at Auth0](https://auth0.com/) and then [open the Dashboard](https://manage.auth0.com). Click on the "Default App" from the Apps/APIs section and enter your callback URLs: `http://localhost:8000/callback` in the list of Available Callback URLs. You'll need some of the settings from this page when configuring up your app.
 
-    git clone git@github.com:cloudspokes/minisite-template.git mynewminisite
-    cd mynewminisite
-    npm install
-    node app.js
-    // open http://localhost:3000
+In app.js, after a successfuly login with Auth0, we are hardcoding a member object that will eventually be
+returned from calling the topcoder API. This just makes development easier for now. Feel free to change 
+the handle to whatever you'd like.
 
-## Configuration
+## Local Installation Instructions
 
-app.js - the node application that runs the site. It has a couple of settings near the top that defines the URLs for the challenges search endpoint, the challenge statuses to display, the leaderboard endpoint and the community display name.
+From the command line type in:
 
-views/layouts/main.handlebars - the main layout for the app.
+```
+git clone git@github.com:topcoderinc/tco-hackathon.git
+cd tco-hackathon
+npm install
+```
 
-views/index.handlebars - the single page for the application. Simply contains the partials that you want to display on the page (challenges, faqs, etc.)
+### Running the Application Locally
 
-views/partials - the individual partials that contain the views for different sections of the site.
+  1. Open terminal and change directory to tco-hackathon root
+  2. Export the following variables to your environment from Auth0.
 
-# Challenges List
+  ```
+  export AUTH0_DOMAIN=YOUR-AUTH0-NAMESPACE
+  export AUTH0_CLIENT_ID=YOUR-AUTH0-CLIENT-ID
+  export AUTH0_CLIENT_SECRET=YOUR-AUTH0-CLIENT-SECRET
+  export AUTH0_CALLBACK_URL=http://localhost:8000/callback
+  export AUTH0_SCOPE='openid'
+  export APIs=Comma delimeted list of APIs to play with the spinn wheel (Google, Twitter ...)
+  export NUMBER_OF_SPINS=The # of spins a team leader could spinn the wheel. This is also the # of APIs per team.
+  ```
+  3. Start the server with `node app.js`
+  4. Point your browser to: [http://localhost:8000](http://localhost:8000)
+  
+### Running the tests
+Before running the tests make sure you have `.env` file in the root of the project folder. to create one follow the `env_sample` file.
 
-The endpoint for the tc-search api can either be set in app.js or as a heroku env variable. If no matching challenges are found, the page will display some text telling them to check back.
+To run the tests type:
 
-# Leaderboard
+`npm test`
 
-The endpoint for the leaderboard api can either be set in app.js or as a heroku env variable. [See the tc-leaderboard repo page](https://github.com/cloudspokes/tc-leaderboard) for more info. You'll want to create a new leaderboard for the new community before you get started. You can use the demo leaderbaord from tc-leaderbaord for testing if you'd like for testing. The instructions for creating a new leadboard are on the tc-leaderboard readme. It's simple.
+in the root project folder.
+
+## Contributors
+* Jeff Douglas -> [jeffdonthemic](https://github.com/jeffdonthemic)
+* Kiril Kartunov -> [colorfullyme](https://github.com/ColorfullyMe)

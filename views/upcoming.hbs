@@ -1,0 +1,47 @@
+
+<!-- ============================================================= SECTION – HERO ============================================================= -->
+
+<section id="hero" class="light-bg img-bg img-bg-softer" style="background-image: url(assets/images/art/image-background04.jpg);">
+  <div class="container inner">
+    <div class="row">
+      <div class="col-md-8">
+        <header>
+          <h1>Upcoming Events</h1>
+          <p>The TopCoder Open is coming to a town near you! Get ready for an awesome hackathon!</p>
+        </header>
+      </div><!-- /.col -->
+    </div><!-- ./row -->
+  </div><!-- /.container -->
+</section>
+
+<!-- ============================================================= SECTION – HERO : END ============================================================= -->
+
+
+<!-- ============================================================= SECTION – PRODUCT ============================================================= -->
+
+<section id="product">
+  <div class="container inner">
+
+    {{#each events}}
+
+    <div class="{{ classRowHelper @index }}">
+
+      <div class="{{ class1helper @index }}">
+        <figure><img src="{{ flagImageUrl }}" alt=""></figure>
+      </div><!-- /.col -->
+
+      <div class="{{ class2helper @index }}">
+        <h2>{{ name }}</h2>
+        <p>{{ city }} <br/> {{ dates }}</p>
+        <p>{{ teaser }}</p>
+        <a href="{{ id }}" class="txt-btn">More info</a>
+      </div><!-- /.col -->
+
+    </div><!-- /.row -->
+
+    {{/each}}
+
+  </div><!-- /.container -->
+</section>
+
+<!-- ============================================================= SECTION – PRODUCT : END ============================================================= -->

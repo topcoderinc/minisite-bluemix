@@ -1,0 +1,130 @@
+<!-- ============================================================= SECTION – HERO ============================================================= -->
+
+<section id="hero" class="dark-bg img-bg img-bg-soft" style="background-image: url({{ event.backgroundImageUrl }});">
+  <div class="container inner-top-md inner-bottom-sm">
+    <div class="row">
+
+      <div class="col-md-8 inner-right inner-bottom-xs">
+        <header>
+          <h1>{{event.name}}</h1>
+          <p>{{event.teaser}}</p>
+        </header>
+      </div><!-- /.col -->
+
+      <div class="col-md-4">
+        <h3 style="margin-top: 8px;">DETAILS</h3>
+        <ul class="contacts">
+          <li><i class="icon-globe-1"></i> {{event.city}}</li>
+          <li><i class="icon-location"></i> {{event.location}}</li>
+          <li><i class="icon-calendar-1"></i> {{event.dates}}</li>
+        </ul><!-- /.contacts -->
+      </div><!-- /.col -->
+
+    </div><!-- ./row -->
+  </div><!-- /.container -->
+</section>
+
+<!-- ============================================================= SECTION – HERO : END ============================================================= -->
+
+<!-- ============================================================= SECTION – GET STARTED ============================================================= -->
+{{#if event.registrationOpen}}
+<section id="get-started" class="tint-bg">
+  <div class="container inner-sm" style="padding-top:20px;padding-bottom:20px">
+    <div class="row">
+      <div class="col-sm-11 center-block text-center">
+        {{#if signedId}}
+          <h1 class="single-block">Ready to compete? <a href="{{event.id}}/register" class="btn btn-large">Register Now</a></h1>
+        {{else}}
+          <h1 class="single-block">Ready to compete? <a href="#"  onclick="login()" class="btn btn-large">Register Now</a></h1>
+        {{/if}}
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+</section>
+{{/if}}
+
+<!-- ============================================================= SECTION – GET STARTED : END ============================================================= -->
+
+
+<!-- ============================================================= SECTION – SERVICES ============================================================= -->
+
+<section id="services">
+  <div class="container inner">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="tabs tabs-services tabs-circle-top tab-container">
+
+          <ul class="etabs text-center">
+            <li class="tab"><a href="#tab-1"><div><i class="icon-info-circled"></i></div>Overview</a></li>
+            <li class="tab"><a href="#tab-2"><div><i class="icon-money"></i></div>Prizes</a></li>
+            <li class="tab"><a href="#tab-3"><div><i class="icon-users-1"></i></div>Participants</a></li>
+            <li class="tab"><a href="#tab-4"><div><i class="icon-hammer"></i></div>Rules</a></li>
+            <li class="tab"><a href="#tab-5"><div><i class="icon-rocket"></i></div>Register</a></li>
+          </ul><!-- /.etabs -->
+
+          <div class="panel-container">
+
+            <div class="tab-content" id="tab-1">
+              <div class="row">
+                <div class="col-md-8 col-sm-9 center-block">
+                  {{{ event.overview }}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content" id="tab-2">
+              <div class="row">
+                <div class="col-md-8 col-sm-9 center-block">
+                  {{{ event.prizes }}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content" id="tab-3">
+              <div class="row">
+                <div class="col-md-8 col-sm-9 center-block">
+                  <p>Hackers can compete by themselves or part of a team.</p>
+                  <ol>
+                  {{#each event.teams}}
+                    <li> <a href="/{{../event.id}}/teams/{{this.id}}">{{this.name}}</a><br/>
+                  {{/each}}
+                  </ol>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content" id="tab-4">
+              <div class="row">
+                <div class="col-md-8 col-sm-9 center-block">
+                  {{{ event.rules }}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content" id="tab-5">
+              <div class="row">
+                <div class="col-md-8 col-sm-9 center-block">
+                  {{{ event.registration }}}
+
+                  {{#if event.registrationOpen}}
+                    {{#if signedId}}
+                      <h1 class="single-block">Ready to compete? <a href="{{event.id}}/register" class="btn btn-large">Register Now</a></h1>
+                    {{else}}
+                      <h1 class="single-block">Ready to compete? <a href="#"  onclick="login()" class="btn btn-large">Register Now</a></h1>
+                    {{/if}}
+                  {{else}}
+                    <p><b>Hackathon registration is not open yet. Please check back.</b></p>
+                  {{/if}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+
+          </div><!-- /.panel-container -->
+
+        </div><!-- /.tabs -->
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+</section>
+
+<!-- ============================================================= SECTION – SERVICES : END ============================================================= -->
