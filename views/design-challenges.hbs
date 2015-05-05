@@ -1,0 +1,61 @@
+<!-- ============================================================= SECTION – HERO ============================================================= -->
+
+<section id="hero" class="light-bg img-bg img-bg-softer" style="background-image: url(https://farm9.staticflickr.com/8259/15825061491_528acd4baa_c.jpg);">
+  <div class="container inner" style="padding-top:40px;padding-bottom:40px">
+    <div class="row">
+      <div class="col-md-8">
+        <header>
+          <h1>Design Challenges</h1>
+          <p>Design some cool stuff.</p>
+        </header>
+      </div><!-- /.col -->
+    </div><!-- ./row -->
+  </div><!-- /.container -->
+</section>
+
+<!-- ============================================================= SECTION – HERO : END ============================================================= -->
+
+<div class="container inner" style="padding-top:60px">
+
+    <div class="row">
+      <div class="col-sm-11 center-block inner-top-xs">
+        
+        <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Challenge</th>
+            <th></th>
+            <th>Deadline</th>
+            <th></th>
+            <th>Prizes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each challenges}}
+          <tr>
+            <td>
+              <a href="http://www.topcoder.com/challenge-details/{{this._source.challengeId}}?type={{this._type}}" target="_blank">{{this._source.challengeName}}</a>
+              <span class="small">
+              <br/>Registrants: {{this._source.numRegistrants}}&nbsp;&nbsp;&nbsp;Submissions: {{this._source.numSubmissions}}
+              </span>
+             </td>
+            <td></td>
+            <td>
+              {{#if this._source.isComplete}}
+                Completed
+              {{else}}
+                {{this._source.submissionEndDate}} (UTC)
+              {{/if}}
+              </td>
+            <td></td>
+            <td>${{this._source.totalPrize}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+        </table>
+
+
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+
+</div><!-- /.container -->

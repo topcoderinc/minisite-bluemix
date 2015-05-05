@@ -1,17 +1,81 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var passport = require('passport');
+var request = require('request');
 var _ = require('lodash');
-var requiresLogin = require('../requiresLogin');
-var Event = require('../models/Event');
-var Team = require('../models/Team');
-var TeamMember = require('../models/TeamMember');
-var Promise = require("bluebird");
-var join = Promise.join;
-var request = Promise.promisify(require("request"));
-
 var hbs = require('hbs');
+var moment = require('moment');
+
+// fetches a leaderboard as json and exposes it to hbs
+var leaderboard = function(req, res, next) {
+
+  function isInt(n) {
+     return n % 1 === 0;
+  }
+
+  var type = req.url.split('/')[1];
+  var endpoint = process.env.DESIGN_LEADERBOARD_ENDPOINT;
+  if (type === 'development')
+    endpoint = process.env.DEVELOPMENT_LEADERBOARD_ENDPOINT;
+
+  request(endpoint, function (error, response, body) {
+
+    if (!error && response.statusCode == 200) {
+      var leaderboard = JSON.parse(body);
+      var rows = leaderboard.length/3;
+      // add one extra row if needd
+      if (!isInt(rows))
+        rows = Math.floor(rows) + 1;
+
+      var data = [];
+      var counter = 0;
+
+      for (var i=0;i<rows;i++) {
+        var row = [];
+        if (leaderboard[counter]) row.push(leaderboard[counter]);
+        counter++;
+        if (leaderboard[counter]) row.push(leaderboard[counter]);
+        counter++;
+        if (leaderboard[counter]) row.push(leaderboard[counter]);
+        counter++;
+        data.push(row)
+      }
+
+      req.leaderboard = data;
+    } else {
+      req.leaderboard = [];
+    }
+    return next();
+  });
+}
+
+var challenges = function(req, res, next) {
+
+  var type = req.url.split('/')[1];
+  console.log(type);
+  var endpoint = process.env.DESIGN_CHALLENGES_ENDPOINT;
+  if (type === 'development')
+    endpoint = process.env.DEVELOPMENT_CHALLENGES_ENDPOINT;
+
+  request(endpoint, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var challenges = JSON.parse(body);
+      console.log(challenges.length);
+      _.forEach(challenges, function(c, key){
+        c._source.platforms = c._source.platforms.join(', ');
+        c._source.technologies = c._source.technologies.join(', ')
+        c._source.submissionEndDate = moment.utc(c._source.submissionEndDate).format('MMMM Do YYYY, h:mm:ss a');
+        c._source.totalPrize = _.reduce(c._source.prize, function(sum, el) {
+          return sum + el
+        }, 0)
+        c._source.isComplete =  c._source.currentStatus === 'Completed' ? true : false;
+      });
+      req.challenges = challenges;
+    } else {
+      req.challenges = [];
+    }
+    return next();
+  });
+}
 
 router.get('/welcome', function (req, res) {
   res.render('welcome');
@@ -25,43 +89,36 @@ router.get('/faqs', function (req, res) {
   res.render('faqs');
 });
 
+router.get('/design/leaderboard', leaderboard, function (req, res) {
+  res.render('design-leaderboard', {
+    leaders: req.leaderboard
+  });
+});
+
+router.get('/development/leaderboard', leaderboard, function (req, res) {
+  res.render('development-leaderboard', {
+    leaders: req.leaderboard
+  });
+});
+
 router.get('/challenges/fun', function (req, res) {
   res.render('challenges-fun.hbs');
 });
 
+router.get('/design/challenges', challenges, function (req, res) {
+  res.render('design-challenges.hbs', {
+    challenges: req.challenges
+  });
+});
+
+router.get('/development/challenges', challenges, function (req, res) {
+  res.render('development-challenges.hbs', {
+    challenges: req.challenges
+  });
+});
+
 router.get('/', function (req, res) {
   res.render('index');
-});
-
-router.get('/login', function (req, res) {
-  res.render('login');
-});
-
-router.get('/logout', function (req, res) {
-  var returnTo = process.env['AUTH0_CALLBACK_URL'].split('/callback')[0];
-  res.redirect("https://" + process.env['AUTH0_DOMAIN'] + "/v2/logout?returnTo=" + returnTo);
-});
-
-// Auth0 callback handler
-router.get('/callback',
-  passport.authenticate('auth0', {
-    failureRedirect: '/failure'
-  }),
-  function (req, res) {
-    if (!req.user) {
-      throw new Error('user null');
-    }
-    res.redirect("/");
-  });
-
-router.get('/failure', function (req, res) {
-  res.render('failure');
-});
-
-router.get('/user', requiresLogin, function (req, res) {
-  console.log(req.user);
-  var returnTo = process.env['AUTH0_CALLBACK_URL'].split('/callback')[0];
-  res.render('index', { registerReturnUrl: returnTo });
 });
 
 module.exports = router;
