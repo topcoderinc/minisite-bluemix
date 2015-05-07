@@ -20,33 +20,33 @@
 
 <section id="team" class="light-bg">
 	<div class="container inner-top inner-bottom-sm">
-		
+
 		<div class="row">
 			<div class="col-md-8 col-sm-10 center-block text-center">
 				<header>
 					<h1>IBM Bluemix Top Developers</h1>
-					<p>How good is your code? Can you rise to the top of the leaderboard? <a href="/design/challenges">Start competing today!</a></p>
+					<p>How good is your code? Can you rise to the top of the leaderboard? <a href="/development/challenges">Start competing today!</a></p>
 				</header>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
-		
+
 		<div class="row inner-top-sm text-center">
-			
+
 			{{#each leaders}}
-			
+
 			{{#if this.[0]}}
 				<div class="col-sm-4 inner-bottom-sm inner-left inner-right">
 					<figure class="member">
 						<div class="icon-overlay icn-link">
 							<a href="http://www.topcoder.com/member-profile/{{this.[0].handle}}"><img src="{{this.[0].pic}}" class="img-circle"></a>
-						</div><!-- /.icon-overlay -->					
+						</div><!-- /.icon-overlay -->
 						<figcaption>
 							<h2>{{this.[0].handle}}<span>{{this.[0].score}}pts</span></h2>
 						</figcaption>
 					</figure>
 				</div><!-- /.col -->
 			{{/if}}
-			
+
 			{{#if this.[1]}}
 				<div class="col-sm-4 inner-bottom-sm inner-left inner-right">
 					<figure class="member">
@@ -59,7 +59,7 @@
 					</figure>
 				</div><!-- /.col -->
 			{{/if}}
-			
+
 			{{#if this.[2]}}
 				<div class="col-sm-4 inner-bottom-sm inner-left inner-right">
 					<figure class="member">
@@ -72,11 +72,11 @@
 					</figure>
 				</div><!-- /.col -->
 			{{/if}}
-			
+
 			{{/each}}
-			
+
 		</div><!-- /.row -->
-		
+
 	</div><!-- /.container -->
 </section>
 
