@@ -102,7 +102,11 @@ router.get('/development/leaderboard', leaderboard, function (req, res) {
 });
 
 router.get('/challenges/fun', function (req, res) {
-  res.render('challenges-fun.hbs');
+  res.render('challenges-fun.hbs', { funChallengeUrl: process.env.FUN_CHALLENGE_URL});
+});
+
+router.get('/codeblitz', function (req, res) {
+  res.render('codeblitz.hbs');
 });
 
 router.get('/design/challenges', challenges, function (req, res) {
