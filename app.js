@@ -10,6 +10,7 @@ var hbs = require('hbs');
 var request = require("request");
 
 hbs.registerHelper('json', JSON.stringify);
+hbs.registerPartials(__dirname + '/views/partials');
 
 var routes = require('./routes/index');
 

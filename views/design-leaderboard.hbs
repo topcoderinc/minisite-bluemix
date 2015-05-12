@@ -1,7 +1,7 @@
 
 <!-- ============================================================= SECTION – HERO ============================================================= -->
 
-<section id="hero" class="img-bg-bottom img-bg-soft tint-bg" style="background-image: url(https://farm8.staticflickr.com/7544/15644457659_3e3536f219_h.jpg);">
+<section id="hero" class="img-bg-bottom img-bg-soft tint-bg" style="background-image: url(https://farm4.staticflickr.com/3738/10823474603_8b27dd4cd0_b.jpg);">
   <div class="container inner">
     <div class="row">
       <div class="col-sm-10">
@@ -20,7 +20,7 @@
 
 <section id="team" class="light-bg">
 	<div class="container inner-top inner-bottom-sm">
-		
+
 		<div class="row">
 			<div class="col-md-8 col-sm-10 center-block text-center">
 				<header>
@@ -29,24 +29,24 @@
 				</header>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
-		
+
 		<div class="row inner-top-sm text-center">
-			
+
 			{{#each leaders}}
-			
+
 			{{#if this.[0]}}
 				<div class="col-sm-4 inner-bottom-sm inner-left inner-right">
 					<figure class="member">
 						<div class="icon-overlay icn-link">
 							<a href="http://www.topcoder.com/member-profile/{{this.[0].handle}}"><img src="{{this.[0].pic}}" class="img-circle"></a>
-						</div><!-- /.icon-overlay -->					
+						</div><!-- /.icon-overlay -->
 						<figcaption>
 							<h2>{{this.[0].handle}}<span>{{this.[0].score}}pts</span></h2>
 						</figcaption>
 					</figure>
 				</div><!-- /.col -->
 			{{/if}}
-			
+
 			{{#if this.[1]}}
 				<div class="col-sm-4 inner-bottom-sm inner-left inner-right">
 					<figure class="member">
@@ -59,7 +59,7 @@
 					</figure>
 				</div><!-- /.col -->
 			{{/if}}
-			
+
 			{{#if this.[2]}}
 				<div class="col-sm-4 inner-bottom-sm inner-left inner-right">
 					<figure class="member">
@@ -72,11 +72,11 @@
 					</figure>
 				</div><!-- /.col -->
 			{{/if}}
-			
+
 			{{/each}}
-			
+
 		</div><!-- /.row -->
-		
+
 	</div><!-- /.container -->
 </section>
 
@@ -97,3 +97,5 @@
 </section>
 
 <!-- ============================================================= SECTION – GET STARTED : END ============================================================= -->
+
+{{> bluemix_signup}}
