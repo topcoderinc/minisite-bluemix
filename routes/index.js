@@ -89,6 +89,10 @@ router.get('/faqs', function (req, res) {
   res.render('faqs');
 });
 
+router.get('/sponsors', function (req, res) {
+  res.render('sponsors');
+});
+
 router.get('/design/leaderboard', leaderboard, function (req, res) {
   res.render('design-leaderboard', {
     leaders: req.leaderboard
