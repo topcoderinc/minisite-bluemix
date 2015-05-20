@@ -32,6 +32,10 @@
 
 		<div class="row inner-top-sm text-center">
 
+      {{#unless leaders}}
+        <p>No results on the leaderboard at this time. Once challenges finish up the results will be posted to the leaderboard so please check back and see who climbs to the top!</p>
+      {{/unless}}
+
 			{{#each leaders}}
 
 			{{#if this.[0]}}
@@ -81,21 +85,5 @@
 </section>
 
 <!-- ============================================================= SECTION – TEAM : END ============================================================= -->
-
-
-
-<!-- ============================================================= SECTION – GET STARTED ============================================================= -->
-
-<section id="get-started" class="tint-bg">
-  <div class="container inner-sm" style="padding-top:20px;padding-bottom:20px">
-    <div class="row">
-      <div class="col-sm-11 center-block text-center">
-        <h1 class="single-block">Not a topcoder member? <a href="https://www.topcoder.com/?action=showlogin&next={{registerReturnUrl}}" class="btn btn-large">Sign Up Now</a></h1>
-      </div><!-- /.col -->
-    </div><!-- /.row -->
-  </div><!-- /.container -->
-</section>
-
-<!-- ============================================================= SECTION – GET STARTED : END ============================================================= -->
 
 {{> bluemix_signup}}
