@@ -4,6 +4,7 @@ var request = require('request');
 var _ = require('lodash');
 var hbs = require('hbs');
 var moment = require('moment');
+var tz = require('moment-timezone');
 
 // fetches a leaderboard as json and exposes it to hbs
 var leaderboard = function(req, res, next) {
@@ -51,7 +52,6 @@ var leaderboard = function(req, res, next) {
 var challenges = function(req, res, next) {
 
   var type = req.url.split('/')[1];
-  console.log(type);
   var endpoint = process.env.DESIGN_CHALLENGES_ENDPOINT;
   if (type === 'development')
     endpoint = process.env.DEVELOPMENT_CHALLENGES_ENDPOINT;
@@ -59,11 +59,10 @@ var challenges = function(req, res, next) {
   request(endpoint, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var challenges = JSON.parse(body);
-      console.log(challenges.length);
       _.forEach(challenges, function(c, key){
         c._source.platforms = c._source.platforms.join(', ');
         c._source.technologies = c._source.technologies.join(', ')
-        c._source.submissionEndDate = moment.utc(c._source.submissionEndDate).format('MMMM Do YYYY, h:mm:ss a');
+        c._source.submissionEndDate = moment.utc(c._source.submissionEndDate).tz('America/New_York').format('MMMM Do YYYY, h:mm:ss a');
         c._source.totalPrize = _.reduce(c._source.prize, function(sum, el) {
           return sum + el
         }, 0)
