@@ -1,53 +1,47 @@
 var express = require('express');
 var router = express.Router();
-var request = require('request');
+var Promise = require("bluebird");
+var request = Promise.promisify(require("request"));
 var _ = require('lodash');
 var hbs = require('hbs');
 var moment = require('moment');
 var tz = require('moment-timezone');
 
-// fetches a leaderboard as json and exposes it to hbs
-var leaderboard = function(req, res, next) {
+var leaderboard = function(url) {
 
   function isInt(n) {
      return n % 1 === 0;
   }
 
-  var type = req.url.split('/')[1];
-  var endpoint = process.env.DESIGN_LEADERBOARD_ENDPOINT;
-  if (type === 'development')
-    endpoint = process.env.DEVELOPMENT_LEADERBOARD_ENDPOINT;
+  return new Promise(function(resolve, reject) {
+    request(url, function callback(error, response, body) {
+      if(!error && response.statusCode === 200){
+        var leaderboard = JSON.parse(body);
+        var rows = leaderboard.length/3;
+        var data = [];
+        var counter = 0;
 
-  request(endpoint, function (error, response, body) {
+        // add one extra row if needd
+        if (!isInt(rows))
+          rows = Math.floor(rows) + 1;
 
-    if (!error && response.statusCode == 200) {
-      var leaderboard = JSON.parse(body);
-      var rows = leaderboard.length/3;
-      // add one extra row if needd
-      if (!isInt(rows))
-        rows = Math.floor(rows) + 1;
-
-      var data = [];
-      var counter = 0;
-
-      for (var i=0;i<rows;i++) {
-        var row = [];
-        if (leaderboard[counter]) row.push(leaderboard[counter]);
-        counter++;
-        if (leaderboard[counter]) row.push(leaderboard[counter]);
-        counter++;
-        if (leaderboard[counter]) row.push(leaderboard[counter]);
-        counter++;
-        data.push(row)
+        for (var i=0;i<rows;i++) {
+          var row = [];
+          if (leaderboard[counter]) row.push(leaderboard[counter]);
+          counter++;
+          if (leaderboard[counter]) row.push(leaderboard[counter]);
+          counter++;
+          if (leaderboard[counter]) row.push(leaderboard[counter]);
+          counter++;
+          data.push(row)
+        }
+        resolve(data);
+      }else{
+        reject(error)
       }
-
-      req.leaderboard = data;
-    } else {
-      req.leaderboard = [];
-    }
-    return next();
+    });
   });
-}
+};
 
 var challenges = function(req, res, next) {
 
@@ -92,15 +86,43 @@ router.get('/sponsors', function (req, res) {
   res.render('sponsors');
 });
 
-router.get('/design/leaderboard', leaderboard, function (req, res) {
-  res.render('design-leaderboard', {
-    leaders: req.leaderboard
+router.get('/design/leaderboard', function (req, res) {
+  var allLeaderboards = [];
+  Promise.join(
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-june'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-july'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-august')
+  ).then(function(data) {
+    allLeaderboards = data;
+  }).catch(function(e) {
+    console.log(e);
+  }).finally(function(){
+    // would have like to pass a single array but hbs was choking
+    res.render('design-leaderboard', {
+      month1: allLeaderboards[0],
+      month2: allLeaderboards[1],
+      month3: allLeaderboards[2]
+    });
   });
 });
 
-router.get('/development/leaderboard', leaderboard, function (req, res) {
-  res.render('development-leaderboard', {
-    leaders: req.leaderboard
+router.get('/development/leaderboard', function (req, res) {
+  var allLeaderboards = [];
+  Promise.join(
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-development-june'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-development-july'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-development-august')
+  ).then(function(data) {
+    allLeaderboards = data;
+  }).catch(function(e) {
+    console.log(e);
+  }).finally(function(){
+    // would have like to pass a single array but hbs was choking
+    res.render('development-leaderboard', {
+      month1: allLeaderboards[0],
+      month2: allLeaderboards[1],
+      month3: allLeaderboards[2]
+    });
   });
 });
 

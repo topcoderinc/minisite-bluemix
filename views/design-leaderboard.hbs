@@ -30,58 +30,52 @@
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 
-		<div class="row inner-top-sm text-center">
-
-      {{#unless leaders}}
-        <p>No results on the leaderboard at this time. Once challenges finish up the results will be posted to the leaderboard so please check back and see who climbs to the top!</p>
-      {{/unless}}
-
-			{{#each leaders}}
-
-			{{#if this.[0]}}
-				<div class="col-sm-4 inner-bottom-sm inner-left inner-right">
-					<figure class="member">
-						<div class="icon-overlay icn-link">
-							<a href="http://www.topcoder.com/member-profile/{{this.[0].handle}}"><img src="{{this.[0].pic}}" class="img-circle"></a>
-						</div><!-- /.icon-overlay -->
-						<figcaption>
-							<h2>{{this.[0].handle}}<span>{{this.[0].score}}pts</span></h2>
-						</figcaption>
-					</figure>
-				</div><!-- /.col -->
-			{{/if}}
-
-			{{#if this.[1]}}
-				<div class="col-sm-4 inner-bottom-sm inner-left inner-right">
-					<figure class="member">
-						<div class="icon-overlay icn-link">
-							<a href="http://www.topcoder.com/member-profile/{{this.[1].handle}}"><img src="{{this.[1].pic}}" class="img-circle"></a>
-						</div><!-- /.icon-overlay -->
-						<figcaption>
-							<h2>{{this.[1].handle}}<span>{{this.[1].score}}pts</span></h2>
-						</figcaption>
-					</figure>
-				</div><!-- /.col -->
-			{{/if}}
-
-			{{#if this.[2]}}
-				<div class="col-sm-4 inner-bottom-sm inner-left inner-right">
-					<figure class="member">
-						<div class="icon-overlay icn-link">
-							<a href="http://www.topcoder.com/member-profile/{{this.[2].handle}}"><img src="{{this.[2].pic}}" class="img-circle"></a>
-						</div><!-- /.icon-overlay -->
-						<figcaption>
-							<h2>{{this.[2].handle}}<span>{{this.[2].score}}pts</span></h2>
-						</figcaption>
-					</figure>
-				</div><!-- /.col -->
-			{{/if}}
-
-			{{/each}}
-
-		</div><!-- /.row -->
-
 	</div><!-- /.container -->
+</section>
+
+<section id="services">
+  <div class="container inner">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="tabs tabs-services tabs-circle-top tab-container">
+
+          <ul class="etabs text-center">
+            <li class="tab"><a href="#tab-1">June</a></li>
+            <li class="tab"><a href="#tab-2">July</a></li>
+            <li class="tab"><a href="#tab-3">August</a></li>
+          </ul>
+          <div class="panel-container">
+
+            <div class="tab-content" id="tab-1">
+              <div class="row">
+                <div class="row inner-top-sm text-center">
+                  {{> leaderboard leaders=month1}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content" id="tab-2">
+              <div class="row">
+                <div class="row inner-top-sm text-center">
+                  {{> leaderboard leaders=month2}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content" id="tab-3">
+              <div class="row">
+                <div class="row inner-top-sm text-center">
+                  {{> leaderboard leaders=month3}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+
+          </div><!-- /.panel-container -->
+
+        </div><!-- /.tabs -->
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 </section>
 
 <!-- ============================================================= SECTION – TEAM : END ============================================================= -->
