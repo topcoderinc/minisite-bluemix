@@ -127,7 +127,11 @@ router.get('/development/leaderboard', function (req, res) {
 });
 
 router.get('/challenges/fun', function (req, res) {
-  res.render('challenges-fun.hbs', { funChallengeId: process.env.FUN_CHALLENGE_ID});
+  res.render('challenges-fun.hbs', 
+					{ 
+						funChallengeId: process.env.FUN_CHALLENGE_ID,
+						registerChallengeId: process.env.REGISTER_CHALLENGE_ID
+					});
 });
 
 router.get('/codeblitz', function (req, res) {
