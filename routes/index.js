@@ -50,10 +50,12 @@ var challenges = function(req, res, next) {
   if (type === 'development')
     endpoint = process.env.DEVELOPMENT_CHALLENGES_ENDPOINT;
 
+  console.log(endpoint);
   request(endpoint, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var challenges = JSON.parse(body);
       _.forEach(challenges, function(c, key){
+        console.log(c._source.currentStatus);
         c._source.platforms = c._source.platforms.join(', ');
         c._source.technologies = c._source.technologies.join(', ')
         c._source.submissionEndDate = moment.utc(c._source.submissionEndDate).tz('America/New_York').format('MMMM Do YYYY, h:mm:ss a');
@@ -127,8 +129,8 @@ router.get('/development/leaderboard', function (req, res) {
 });
 
 router.get('/challenges/fun', function (req, res) {
-  res.render('challenges-fun.hbs', 
-					{ 
+  res.render('challenges-fun.hbs',
+					{
 						funChallengeId: process.env.FUN_CHALLENGE_ID,
 						registerChallengeId: process.env.REGISTER_CHALLENGE_ID
 					});
