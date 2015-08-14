@@ -44,9 +44,9 @@ var leaderboard = function(url) {
 };
 
 function date_Sort(recordA,recordB){
-  var diff =  new Date(recordA._source.sortDate).getTime() - new  Date(recordB._source.sortDate).getTime();  
+  var diff =  new Date(recordA._source.sortDate).getTime() - new  Date(recordB._source.sortDate).getTime();
   return diff *  -1;
-} 
+}
 
 var challenges = function(req, res, next) {
 
@@ -117,9 +117,9 @@ router.get('/design/leaderboard', function (req, res) {
 router.get('/development/leaderboard', function (req, res) {
   var allLeaderboards = [];
   Promise.join(
-    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-development-june'),
-    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-development-july'),
-    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-development-august')
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-june'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-july'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-august')
   ).then(function(data) {
     allLeaderboards = data;
   }).catch(function(e) {
