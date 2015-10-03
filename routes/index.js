@@ -99,7 +99,8 @@ router.get('/design/leaderboard', function (req, res) {
   Promise.join(
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-june'),
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-july'),
-    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-august')
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-august'),
+	leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-september')
   ).then(function(data) {
     allLeaderboards = data;
   }).catch(function(e) {
@@ -109,7 +110,8 @@ router.get('/design/leaderboard', function (req, res) {
     res.render('design-leaderboard', {
       month1: allLeaderboards[0],
       month2: allLeaderboards[1],
-      month3: allLeaderboards[2]
+      month3: allLeaderboards[2],
+	  month4: allLeaderboards[3]
     });
   });
 });
@@ -119,7 +121,8 @@ router.get('/development/leaderboard', function (req, res) {
   Promise.join(
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-june'),
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-july'),
-    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-august')
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-august'),
+	leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-september')
   ).then(function(data) {
     allLeaderboards = data;
   }).catch(function(e) {
@@ -129,7 +132,8 @@ router.get('/development/leaderboard', function (req, res) {
     res.render('development-leaderboard', {
       month1: allLeaderboards[0],
       month2: allLeaderboards[1],
-      month3: allLeaderboards[2]
+      month3: allLeaderboards[2],
+	  month4: allLeaderboards[3]
     });
   });
 });
