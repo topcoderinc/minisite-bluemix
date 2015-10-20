@@ -64,9 +64,9 @@ var challenges = function(req, res, next) {
         c._source.technologies = c._source.technologies.join(', ');
         c._source.sortDate = c._source.submissionEndDate; //date used for sorting the records
         c._source.submissionEndDate = moment.utc(c._source.submissionEndDate).tz('America/New_York').format('MMMM Do YYYY, h:mm:ss a');
-        c._source.totalPrize = _.reduce(c._source.prize, function(sum, el) {
-          return sum + el
-        }, 0)
+        //c._source.totalPrize = _.reduce(c._source.prize, function(sum, el) {
+        //  return sum + el
+        //}, 0)
         c._source.isComplete =  c._source.currentStatus === 'Completed' ? true : false;
       });
       challenges.sort(date_Sort);
