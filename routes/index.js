@@ -100,7 +100,10 @@ router.get('/design/leaderboard', function (req, res) {
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-june'),
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-july'),
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-august'),
-	leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-september')
+	  leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-september'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-october'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-november'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-design-december')
   ).then(function(data) {
     allLeaderboards = data;
   }).catch(function(e) {
@@ -111,7 +114,10 @@ router.get('/design/leaderboard', function (req, res) {
       month1: allLeaderboards[0],
       month2: allLeaderboards[1],
       month3: allLeaderboards[2],
-	  month4: allLeaderboards[3]
+	    month4: allLeaderboards[3],
+      monthOct: allLeaderboards[4],
+      monthNov: allLeaderboards[5],
+      monthDec: allLeaderboards[6]
     });
   });
 });
@@ -122,7 +128,10 @@ router.get('/development/leaderboard', function (req, res) {
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-june'),
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-july'),
     leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-august'),
-	leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-september')
+	  leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-september'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-october'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-november'),
+    leaderboard('http://tc-leaderboard.herokuapp.com/sibm-dev-december')
   ).then(function(data) {
     allLeaderboards = data;
   }).catch(function(e) {
@@ -133,7 +142,10 @@ router.get('/development/leaderboard', function (req, res) {
       month1: allLeaderboards[0],
       month2: allLeaderboards[1],
       month3: allLeaderboards[2],
-	  month4: allLeaderboards[3]
+	    month4: allLeaderboards[3],
+      monthOct: allLeaderboards[4],
+      monthNov: allLeaderboards[5],
+      monthDec: allLeaderboards[6]
     });
   });
 });

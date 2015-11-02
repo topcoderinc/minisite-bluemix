@@ -43,7 +43,10 @@
             <li class="tab"><a href="#tab-1">June</a></li>
             <li class="tab"><a href="#tab-2">July</a></li>
             <li class="tab"><a href="#tab-3">August</a></li>
-			<li class="tab"><a href="#tab-4">September</a></li>
+			      <li class="tab"><a href="#tab-4">September</a></li>
+            <li class="tab"><a href="#tab-5">October</a></li>
+            <li class="tab"><a href="#tab-6">November</a></li>
+            <li class="tab"><a href="#tab-7">December</a></li>
           </ul>
           <div class="panel-container">
 
@@ -71,10 +74,34 @@
               </div><!-- /.row -->
             </div><!-- /.tab-content -->
 
-			 <div class="tab-content" id="tab-4">
+			     <div class="tab-content" id="tab-4">
               <div class="row">
                 <div class="row inner-top-sm text-center">
                   {{> leaderboard leaders=month4}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+            
+           <div class="tab-content" id="tab-5">
+              <div class="row">
+                <div class="row inner-top-sm text-center">
+                  {{> leaderboard leaders=monthOct}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+            
+           <div class="tab-content" id="tab-6">
+              <div class="row">
+                <div class="row inner-top-sm text-center">
+                  {{> leaderboard leaders=monthNov}}
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tab-content -->
+            
+            <div class="tab-content" id="tab-7">
+              <div class="row">
+                <div class="row inner-top-sm text-center">
+                  {{> leaderboard leaders=monthDec}}
                 </div><!-- /.col -->
               </div><!-- /.row -->
             </div><!-- /.tab-content -->
