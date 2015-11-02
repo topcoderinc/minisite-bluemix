@@ -2161,9 +2161,9 @@ p .btn {
 .tabs-circle-top .tab a {
     display: table-cell;
 	vertical-align: middle;
-	width: 130px;
-	height: 130px;
-	max-width: 130px;
+	width: 120px;
+	height: 120px;
+	max-width: 120px;
 	background: #FFF;
     color: #506A85;
 	font-size: 14px;
@@ -2189,9 +2189,9 @@ p .btn {
 	top: -15px;
 }
 .tabs-circle-top .tab.active a {
-	height: 160px;
-	width: 160px;
-	max-width: 160px;
+	height: 140px;
+	width: 140px;
+	max-width: 140px;
     background: #1ABB9C;
 	font-size: 15px;
 	line-height: 140%;
