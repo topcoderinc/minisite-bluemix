@@ -151,12 +151,55 @@ router.get('/development/leaderboard', function (req, res) {
 });
 
 router.get('/challenges/fun', function (req, res) {
+  var funChallengeID = getNextFunChallenge();
+  var registrationChallengeID = getNextRegistrationChallenge();
+ 
   res.render('challenges-fun.hbs',
 					{
-						funChallengeId: process.env.FUN_CHALLENGE_ID,
-						registerChallengeId: process.env.REGISTER_CHALLENGE_ID
+						funChallengeId: funChallengeID,
+						registerChallengeId: registrationChallengeID
 					});
 });
+
+
+function getNextChallengeAsPerTime(arr){
+  var len = arr.length - 1;
+  var index = len;
+  var currentTime = moment();
+  
+  for(index = len;index > -1;index --){
+    var currentChallenge = arr[index];
+    var challengeTime = moment(currentChallenge.startTime,moment.ISO_8601);
+    if(currentTime.isAfter(challengeTime)) {
+      break;
+    }
+  }
+  return arr[index].challengeID;
+}
+
+function getNextRegistrationChallenge(){
+  var allRegistrationChallenge = [
+      {challengeID: '30051734',startTime:'2015-11-17T13:00:00-05:00'},
+      {challengeID: '30051932',startTime:'2015-11-24T14:00:00-05:00'},
+      {challengeID: '30052250',startTime:'2015-12-01T15:00:00-05:00'},
+      {challengeID: '30052251',startTime:'2015-12-08T16:00:00-05:00'},
+      {challengeID: '30052252',startTime:'2015-12-15T17:00:00-05:00'},
+      {challengeID: '30052253',startTime:'2015-12-22T18:00:00-05:00'}];
+   
+      return getNextChallengeAsPerTime(allRegistrationChallenge);
+}
+
+function getNextFunChallenge(){
+   var allFunChallenge = [
+      {challengeID: '30052167',startTime:'2015-11-17T02:00:00-05:00'},
+      {challengeID: '30052191',startTime:'2015-11-24T03:00:00-05:00'},
+      {challengeID: '30052255',startTime:'2015-12-01T04:00:00-05:00'},
+      {challengeID: '30052256',startTime:'2015-12-08T05:00:00-05:00'},
+      {challengeID: '30052257',startTime:'2015-12-15T06:00:00-05:00'},
+      {challengeID: '30052258',startTime:'2015-12-22T09:00:00-05:00'}];
+      
+      return getNextChallengeAsPerTime(allFunChallenge);
+}
 
 router.get('/codeblitz', function (req, res) {
   res.render('codeblitz.hbs');
