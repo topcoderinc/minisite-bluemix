@@ -31,8 +31,7 @@
             <tr>
               <th>Challenge</th>
               <th></th>
-              <th>Deadline</th>
-              <th></th>
+
               <th>Prizes</th>
             </tr>
           </thead>
@@ -40,21 +39,12 @@
             {{#each challenges}}
             <tr>
               <td>
-                <a href="http://www.topcoder.com/challenge-details/{{this._source.challengeId}}?type={{this._type}}" target="_blank">{{this._source.challengeName}}</a>
-                <span class="small">
-                <br/>Registrants: {{this._source.numRegistrants}}&nbsp;&nbsp;&nbsp;Submissions: {{this._source.numSubmissions}}
-                </span>
+                <a href="http://www.topcoder.com/challenge-details/{{this.Topcoder_Project_Id}}?type={{this.Type}}" target="_blank">{{this.Title}}</a>
+
                </td>
               <td></td>
-              <td>
-                {{#if this._source.isComplete}}
-                  Completed
-                {{else}}
-                  {{this._source.submissionEndDate}} (EDT)
-                {{/if}}
-                </td>
-              <td></td>
-              <td>${{this._source.totalPrize}}</td>
+
+              <td>${{this.Total_Prize}}</td>
             </tr>
             {{/each}}
           </tbody>

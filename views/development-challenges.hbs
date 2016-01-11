@@ -18,53 +18,40 @@
 <div class="container inner" style="padding-top:60px">
 
     <div class="row">
-      <div class="col-sm-11 center-block inner-top-xs">
+        <div class="col-sm-11 center-block inner-top-xs">
 
-        {{#unless challenges}}
-          <p>There are no challenges at this time. Please check back and make sure to watch our <a href="http://www.topcoder.com/blog" target="_blank">blog</a> and <a href="http://www.twitter.com/topcoder" target="_blank">Twitter feed</a>.</p>
-        {{/unless}}
+            {{#unless challenges}}
+                <p>There are no challenges at this time. Please check back and make sure to watch our <a href="http://www.topcoder.com/blog" target="_blank">blog</a> and <a href="http://www.twitter.com/topcoder" target="_blank">Twitter feed</a>.</p>
+            {{/unless}}
 
-        {{#if challenges}}
+            {{#if challenges}}
 
-          <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Challenge</th>
-              <th></th>
-              <th>Deadline</th>
-              <th></th>
-              <th>Prizes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each challenges}}
-            <tr>
-              <td>
-                <a href="http://www.topcoder.com/challenge-details/{{this._source.challengeId}}?type={{this._type}}" target="_blank">{{this._source.challengeName}}</a>
-                <span class="small">
-                <br/>Technologies: {{this._source.technologies}}
-                <br/>Platforms: {{this._source.platforms}}
-                <br/>Registrants: {{this._source.numRegistrants}}&nbsp;&nbsp;&nbsp;Submissions: {{this._source.numSubmissions}}
-                </span>
-               </td>
-              <td></td>
-              <td>
-                {{#if this._source.isComplete}}
-                  Completed
-                {{else}}
-                  {{this._source.submissionEndDate}} (EDT)
-                {{/if}}
-                </td>
-              <td></td>
-              <td>${{this._source.totalPrize}}</td>
-            </tr>
-            {{/each}}
-          </tbody>
-          </table>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Challenge</th>
+                        <th></th>
+                        <th>Prizes</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each challenges}}
+                        <tr>
+                            <td>
+                                <a href="http://www.topcoder.com/challenge-details/{{this.Topcoder_Project_Id}}?type={{this.Type}}" target="_blank">{{this.Title}}</a>
 
-        {{/if}}
+                            </td>
+                            <td></td>
 
-      </div><!-- /.col -->
+                            <td>${{this.Total_Prize}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+
+            {{/if}}
+
+        </div><!-- /.col -->
     </div><!-- /.row -->
 
 </div><!-- /.container -->
